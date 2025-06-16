@@ -1,6 +1,4 @@
 import QRCode from "qrcode";
-import { writeFile } from "fs/promises";
-import path from "path";
 
 export const getInputLink = async (req, res) => {
   res.render("index.ejs");
