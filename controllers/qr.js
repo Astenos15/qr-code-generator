@@ -9,7 +9,7 @@ export const processInputLink = async (req, res) => {
 
   try {
     const qrCodeDataUrl = await QRCode.toDataURL(url); // base64 image
-    res.render("qr-image.ejs", { qrImage: qrCodeDataUrl }); // pass to view
+    res.render("qr-page.ejs", { qrImage: qrCodeDataUrl }); // pass to view
   } catch (err) {
     console.error(err);
     res.status(500).send("Failed to generate QR code");
