@@ -13,6 +13,9 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 
+app.get("/", (req, res) => {
+  res.redirect("/api/v1/qrcode");
+});
 app.use("/api/v1/qrcode", qrRouter);
 
 const port = process.env.PORT || 3000;
