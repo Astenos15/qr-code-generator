@@ -8,13 +8,12 @@ export const getInputLink = async (req, res) => {
 
 export const processInputLink = async (req, res) => {
   const { url } = req.body;
+
   try {
-    const qrPath = path.resolve("public", "images", "qrcode.png");
-    const pngBuffer = await QRCode.toBuffer(url);
-    await writeFile(qrPath, pngBuffer);
-    res.status(200).render("qr-image.ejs");
+    const qrCodeDataUrl = await QRCode.toDataURL(url); // base64 image
+    res.render("qr-image.ejs", { qrImage: qrCodeDataUrl }); // pass to view
   } catch (err) {
-    console.error("❌ Error generating QR code:", err);
-    res.status(500).send("Error generating QR code.");
+    console.error(err);
+    res.status(500).send("Failed to generate QR code");
   }
 };
